@@ -5,7 +5,19 @@ pipeline {
    }
 
   stages {
-      stage('clean workspace') {
+     stage('Pull') {              
+             steps{
+                script{
+                    checkout([$class: 'GitSCM', branches: [[name: '*/master']],
+                        userRemoteConfigs: [[
+                            credentialsId: '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',
+                            url: 'https://github.com/soumayaMb/Terraform--MS-Azure.git']]])
+                }
+            }
+			}         
+
+    }
+	  stage('clean workspace') {
       steps {
         cleanWs()
       }
